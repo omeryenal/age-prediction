@@ -16,3 +16,8 @@ Returns:
 Function Signature:
 def predict(x: np.ndarray, W: float, b: float) -> np.ndarray
 """
+import numpy as np
+
+def predict(x, W, b):
+    y_hat = W * x + b
+    return y_hat

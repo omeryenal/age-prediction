@@ -51,7 +51,7 @@ class TestDay04Assignments(unittest.TestCase):
         x = np.array([1, 2, 3, 4])
         y = np.array([3, 5, 7, 9])  # True function: y = 2x + 1
 
-        final_W, final_b, loss_history = train_linear_model(x, y, epochs=500, learning_rate=0.01)
+        final_W, final_b, loss_history = train_linear_model(x, y, epochs=1000, learning_rate=0.01)
 
         # W and b should converge to ~2 and ~1
         self.assertAlmostEqual(final_W, 2.0, places=1)

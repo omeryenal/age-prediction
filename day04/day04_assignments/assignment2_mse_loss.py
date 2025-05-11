@@ -15,3 +15,8 @@ Returns:
 Function Signature:
 def mse_loss(y_true: np.ndarray, y_pred: np.ndarray) -> float
 """
+import numpy as np
+
+def mse_loss(y_true, y_pred):
+    MSE = np.mean((y_true - y_pred)**2)
+    return MSE

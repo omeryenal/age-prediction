@@ -18,3 +18,8 @@ Returns:
 Function Signature:
 def compute_gradients(x: np.ndarray, y_true: np.ndarray, y_pred: np.ndarray) -> tuple[float, float]
 """
+import numpy as np
+def compute_gradients(x,y_true,y_pred):
+    dW = -2 * np.mean(x * (y_true - y_pred))
+    db = -2 * np.mean(y_true - y_pred)
+    return dW, db
