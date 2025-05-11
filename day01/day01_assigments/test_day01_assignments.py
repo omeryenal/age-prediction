@@ -1,9 +1,9 @@
 import unittest
-from assignment1_is_prime import is_prime
-from assignment2_long_names import filter_long_names
-from assignment3_word_freq import word_frequencies
-from assignment4_zip_dict import create_dict
-from assignment5_file_io import save_numbers_to_file, load_numbers_from_file
+from day01.day01_assigments.assignment1_is_prime import is_prime
+from day01.day01_assigments.assignment2_long_names import filter_long_names
+from day01.day01_assigments.assignment3_word_freq import word_frequencies
+from day01.day01_assigments.assignment4_zip_dict import create_dict
+from day01.day01_assigments.assignment5_file_io import save_numbers_to_file, load_numbers_from_file
 import os
 
 class TestDay01Assignments(unittest.TestCase):

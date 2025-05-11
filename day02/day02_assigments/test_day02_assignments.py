@@ -1,11 +1,11 @@
 import unittest
 import numpy as np
 
-from assignment1_array_creation import *
-from assignment2_array_math import *
-from assignment3_slicing_indexing import *
-from assignment4_reshaping import *
-from assignment5_broadcasting import *
+from day02.day02_assigments.assignment1_array_creation import *
+from day02.day02_assigments.assignment2_array_math import *
+from day02.day02_assigments.assignment3_slicing_indexing import *
+from day02.day02_assigments.assignment4_reshaping import *
+from day02.day02_assigments.assignment5_broadcasting import *
 
 class TestDay02Assignments(unittest.TestCase):
 
