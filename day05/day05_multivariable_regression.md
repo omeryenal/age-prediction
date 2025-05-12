@@ -1,84 +1,64 @@
-# Day 05 – Multivariable Linear Regression
+Day 05 – Multivariable Linear Regression
 
-## Goals for Today
-- Understand how to extend linear regression to multiple features
-- Implement predictions using vectorized matrix operations
-- Calculate MSE loss with multiple features
-- Compute gradients with respect to each weight
-- Perform one step of vectorized gradient descent
+Goals for Today
 
----
+Extend linear regression to multiple input features
 
-## Concept Explanation
+Use vectorized matrix operations for prediction
 
-### 1. Hypothesis with Multiple Features
+Calculate MSE loss in multivariable context
 
-Instead of a single x, we now have multiple inputs: \( x_1, x_2, ..., x_n \)
+Compute gradients with respect to each weight
 
-\[
-\hat{y} = W_1x_1 + W_2x_2 + \cdots + W_nx_n + b
-\]
+Perform one step of vectorized gradient descent
 
-This is equivalent to:
+Concept Explanation
 
-\[
-\hat{y} = \mathbf{X} \cdot \mathbf{W} + b
-\]
+1. Hypothesis with Multiple Features
+
+Given multiple inputs (x₁, x₂, ..., xₙ):
+
+ŷ = W₁·x₁ + W₂·x₂ + ... + Wₙ·xₙ + b
+
+Or in matrix form:
+
+ŷ = X @ W + b
 
 Where:
-- \( \mathbf{X} \) is shape (n_samples, n_features)
-- \( \mathbf{W} \) is shape (n_features,)
-- \( b \) is scalar
-- \( \hat{y} \) is shape (n_samples,)
 
----
+X is shape (n_samples, n_features)
 
-### 2. MSE Loss Function
+W is shape (n_features,)
 
-\[
-\text{MSE} = \frac{1}{n} \sum_{i=1}^n (y_i - \hat{y}_i)^2
-\]
+b is scalar
 
-This measures the average squared difference between actual and predicted values.
+ŷ is shape (n_samples,)
 
----
+2. MSE Loss Function
 
-### 3. Vectorized Gradients
+MSE = (1/n) * Σ (yᵢ - ŷᵢ)²
 
-\[
-\frac{\partial \text{MSE}}{\partial \mathbf{W}} = -\frac{2}{n} \mathbf{X}^T (y - \hat{y})
-\]
-\[
-\frac{\partial \text{MSE}}{\partial b} = -\frac{2}{n} \sum (y - \hat{y})
-\]
+3. Vectorized Gradients
 
----
+dW = -2 * X.T @ (y - ŷ) / n
+db = -2 * mean(y - ŷ)
 
-### 4. Gradient Descent Step (Vectorized)
+4. Gradient Descent Step
 
-\[
-\mathbf{W} := \mathbf{W} - \alpha \cdot \frac{\partial \text{MSE}}{\partial \mathbf{W}}
-\]
-\[
-b := b - \alpha \cdot \frac{\partial \text{MSE}}{\partial b}
-\]
+W = W - lr * dW
+b = b - lr * db
 
-Where \( \alpha \) is the learning rate.
+Where lr is the learning rate.
 
----
+Code Example: One Step
 
-## Code Example
-
-```python
 import numpy as np
 
-# Example data: 3 samples, 2 features
 X = np.array([[1, 2],
               [3, 4],
               [5, 6]])
 y = np.array([10, 20, 30])
 
-# Initialize
 W = np.zeros(X.shape[1])
 b = 0.0
 lr = 0.01
@@ -86,13 +66,33 @@ lr = 0.01
 # Predict
 y_pred = X @ W + b
 
-# Loss
+# Compute loss
 loss = np.mean((y - y_pred) ** 2)
 
-# Gradients
+# Compute gradients
 dW = -2 * X.T @ (y - y_pred) / len(y)
 db = -2 * np.mean(y - y_pred)
 
 # Update
-W -= lr * dW
-b -= lr * db
+W = W - lr * dW
+b = b - lr * db
+
+Assignments
+
+All implementations go in day05_assignments/:
+
+assignment1_predict_multifeature.py→ def predict(X, W, b) -> np.ndarray
+
+assignment2_mse_multifeature.py→ def mse_loss(y_true, y_pred) -> float
+
+assignment3_compute_gradients.py→ def compute_gradients(X, y_true, y_pred) -> tuple[np.ndarray, float]
+
+assignment4_gradient_step_vectorized.py→ def gradient_step(W, b, dW, db, learning_rate) -> tuple[np.ndarray, float]
+
+assignment5_train_model.py→ def train(X, y, epochs, learning_rate) -> tuple[np.ndarray, float, list[float]]
+
+Reflection
+
+Using vectorized math makes ML both elegant and efficient. This prepares me for deep learning models where layers are just matrix operations under the hood.
+
+Next Up: Day 06 – Statistics Refresher: Variance, Covariance, Correlation

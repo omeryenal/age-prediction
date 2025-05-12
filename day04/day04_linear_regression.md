@@ -1,89 +1,93 @@
-# Day 04 – Linear Regression from Scratch
+Day 04 – Linear Regression from Scratch
 
-## Goals for Today
-- Understand the core logic behind linear regression
-- Implement a model using only NumPy
-- Manually compute gradients and update weights
-- Train a simple model using gradient descent
-- Visualize training progress
+Goals for Today
 
----
+Understand the core logic behind linear regression
 
-## Concept Explanation
+Implement a model using only NumPy
 
-### 1. The Linear Model (Hypothesis Function)
+Manually compute gradients and update weights
 
-In univariate linear regression, we try to model the relationship between an input `x` and an output `y` as:
+Train a simple model using gradient descent
 
-\[
-\hat{y} = W \cdot x + b
-\]
+Visualize training progress
+
+Concept Explanation
+
+1. The Linear Model (Hypothesis Function)
+
+We model the relationship between input x and output y as:
+
+ŷ = W * x + b
 
 Where:
-- \( \hat{y} \): predicted output
-- \( W \): weight (slope)
-- \( b \): bias (intercept)
 
-### 2. Loss Function – Mean Squared Error (MSE)
+ŷ: predicted output
 
-To measure how well our predictions match actual data, we use:
+W: weight (slope)
 
-\[
-\text{MSE} = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2
-\]
+b: bias (intercept)
 
-The lower the MSE, the better the model is performing.
+2. Loss Function – Mean Squared Error (MSE)
 
-### 3. Computing Gradients
+MSE = (1/n) * Σ (yᵢ - ŷᵢ)²
 
-To minimize MSE using gradient descent, we calculate the partial derivatives:
+This gives the average squared difference between predicted and true values.
 
-\[
-\frac{\partial \text{MSE}}{\partial W} = -\frac{2}{n} \sum x_i (y_i - \hat{y}_i)
-\]
-\[
-\frac{\partial \text{MSE}}{\partial b} = -\frac{2}{n} \sum (y_i - \hat{y}_i)
-\]
+3. Computing Gradients
 
-These gradients point in the direction we need to adjust W and b.
+∂MSE/∂W = -2 * mean(x * (y - ŷ))
+∂MSE/∂b = -2 * mean(y - ŷ)
 
-### 4. Gradient Descent Update Rule
+4. Gradient Descent Step
 
-\[
-W = W - \alpha \cdot \frac{\partial \text{MSE}}{\partial W}
-\]
-\[
-b = b - \alpha \cdot \frac{\partial \text{MSE}}{\partial b}
-\]
+W = W - lr * ∂MSE/∂W
+b = b - lr * ∂MSE/∂b
 
-Where \( \alpha \) is the learning rate — a small constant like 0.01 or 0.001.
+Where lr is the learning rate.
 
----
+Code Example: One Step
 
-## Code Example: One Step of Training
-
-```python
 import numpy as np
 
-# Sample data
-x = np.array([1, 2, 3, 4])
-y = np.array([3, 5, 7, 9])  # True model: y = 2x + 1
+x = np.array([1, 2, 3])
+y = np.array([3, 5, 7])
 
-# Initialize parameters
 W = 0.0
 b = 0.0
 lr = 0.01
 
-# Prediction
+# Predict
 y_pred = W * x + b
 
-# Loss
+# Compute loss
 loss = np.mean((y - y_pred)**2)
 
-# Gradients
+# Compute gradients
 dW = -2 * np.mean(x * (y - y_pred))
 db = -2 * np.mean(y - y_pred)
 
-# Update
-W -= lr * dW
-b -= lr * db
+# Update weights
+W = W - lr * dW
+b = b - lr * db
+
+Assignments
+
+All implementations go in day04_assignments/:
+
+assignment1_predict_function.py→ def predict(x, W, b) -> np.ndarray
+
+assignment2_mse_loss.py→ def mse_loss(y_true, y_pred) -> float
+
+assignment3_compute_gradients.py→ def compute_gradients(x, y_true, y_pred) -> tuple[float, float]
+
+assignment4_gradient_descent.py→ def gradient_descent_step(W, b, dW, db, learning_rate) -> tuple[float, float]
+
+assignment5_training_loop_plot.py→ def train_linear_model(x, y, epochs, learning_rate) -> tuple[float, float, list[float]]
+
+Reflection
+
+Understanding how weights change based on gradients gave me a solid foundation in optimization.Now I know what’s really happening behind .fit() in ML libraries.Training a model from scratch gave me confidence in loss, learning rate, and convergence mechanics.
+
+Next Up: Day 05 – Multivariable Linear Regression
+
