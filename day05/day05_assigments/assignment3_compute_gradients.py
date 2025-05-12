@@ -18,4 +18,7 @@ def compute_gradients(X: np.ndarray, y_true: np.ndarray, y_pred: np.ndarray) -> 
 import numpy as np
 
 def compute_gradients(X: np.ndarray, y_true: np.ndarray, y_pred: np.ndarray) -> tuple[np.ndarray, float]:
-    pass  # Your code here
+    n = len(X)
+    dW = -2 * X.T @ (y_true - y_pred) / n
+    db = -2 * np.mean(y_true - y_pred)
+    return (dW, db)

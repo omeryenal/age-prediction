@@ -19,4 +19,5 @@ def predict(X: np.ndarray, W: np.ndarray, b: float) -> np.ndarray
 import numpy as np
 
 def predict(X: np.ndarray, W: np.ndarray, b: float) -> np.ndarray:
-    pass  # Your code here
+    y_pred = X @ W + b
+    return y_pred

@@ -51,10 +51,11 @@ class TestDay05Assignments(unittest.TestCase):
 
     def test_train(self):
         # y = 2*x1 + 3*x2 + 1
-        X = np.array([[1, 1], [2, 2], [3, 3]])
-        y = 2 * X[:, 0] + 3 * X[:, 1] + 1  # [6, 11, 16]
+        X = np.array([[1, 2], [2, 3], [3, 4]])
+        y = 2 * X[:, 0] + 3 * X[:, 1] + 1
 
-        final_W, final_b, loss_history = train(X, y, epochs=500, learning_rate=0.01)
+
+        final_W, final_b, loss_history = train(X, y, epochs=5000, learning_rate=0.001)
 
         self.assertEqual(final_W.shape, (2,))
         self.assertIsInstance(final_b, float)

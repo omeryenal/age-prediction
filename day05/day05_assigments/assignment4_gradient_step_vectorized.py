@@ -18,6 +18,7 @@ Function Signature:
 def gradient_step(W: np.ndarray, b: float, dW: np.ndarray, db: float, learning_rate: float) -> tuple[np.ndarray, float]
 """
 import numpy as np
-
-def gradient_step(W: np.ndarray, b: float, dW: np.ndarray, db: float, learning_rate: float) -> tuple[np.ndarray, float]:
-    pass  # Your code here
+def gradient_step(W, b, dW, db, learning_rate):
+    W_new = W - learning_rate * dW
+    b_new = b - learning_rate * db
+    return W_new, b_new

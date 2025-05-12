@@ -16,4 +16,6 @@ def mse_loss(y_true: np.ndarray, y_pred: np.ndarray) -> float
 import numpy as np
 
 def mse_loss(y_true: np.ndarray, y_pred: np.ndarray) -> float:
-    pass  # Your code here
+    n = len(y_pred)
+    MSE = (1/n) * sum((y_true - y_pred)**2)
+    return MSE
